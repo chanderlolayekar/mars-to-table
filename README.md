@@ -1,2 +1,3 @@
-# mars-to-table
-Mars to Table modules and integration tests
+# Mars to Table
+
+Python simulation modules for Mars to Table / BioSim integration.
