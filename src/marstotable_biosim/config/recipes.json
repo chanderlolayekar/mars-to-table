@@ -1,1 +1,10 @@
-
+{
+  "recipe_steak": {
+    "mycelium_kg": 0.18,
+    "plant_fiber_kg": 0.07,
+    "water_kg": 0.05,
+    "output_kcal": 620,
+    "texture_score": 9.2
+  },
+  "daily_capacity_15crew": 12
+}
