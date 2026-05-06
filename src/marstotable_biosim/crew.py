@@ -1,6 +1,6 @@
 class Crew:
     def __init__(self, config):
-        self.size = config['crew_size']
+        self.size = config.get('crew_size', 15)
 
     def consume(self, stores):
         stores['calories'].remove(2800 * self.size)
