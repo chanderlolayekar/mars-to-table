@@ -1,1 +1,1 @@
-# my mars to table bundle
+# mars-to-table package
