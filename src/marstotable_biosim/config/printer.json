@@ -1,1 +1,36 @@
-
+{
+  "printer": {
+    "nozzles": 2,
+    "nozzle_diameter_mm": 1.5,
+    "layer_height_mm": 0.4,
+    "print_speed_mm_s": 25,
+    "max_extrusion_rate_g_s": 8.0
+  },
+  "materials": {
+    "mycelium_paste": {
+      "viscosity_Pa_s": 12000,
+      "protein_content_percent": 32,
+      "fiber_content_percent": 18,
+      "extrusion_temp_C": 35
+    },
+    "plant_fiber_scaffold": {
+      "viscosity_Pa_s": 4500,
+      "cellulose_percent": 65,
+      "extrusion_temp_C": 28
+    }
+  },
+  "print_profiles": {
+    "steak_analog": {
+      "muscle_layers": 60,
+      "fat_marbling_percent": 25,
+      "total_mass_g": 250,
+      "print_time_min": 12
+    },
+    "vegetable_roast": {
+      "fiber_alignment": "crisscross",
+      "total_mass_g": 180,
+      "print_time_min": 8
+    }
+  },
+  "morale_factor": 0.95
+}
