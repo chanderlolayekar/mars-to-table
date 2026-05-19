@@ -11,24 +11,57 @@ class MyceliumModule:
 
     def tick(self, stores):
         dt = 1 / 24.0
-        if stores['inedible_biomass'].level > 10:
-            f_S = stores['inedible_biomass'].level / (20 + stores['inedible_biomass'].level)
+
+        biomass = stores['inedible_biomass'].level
+        if biomass > 10:
+            f_S = biomass / (20 + biomass)
             dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
             self.X += dX
+
             dS = (1 / self.Y_XS) * dX * 1000
             stores['inedible_biomass'].remove(dS)
-            stores['edible_mycelium'].add(dX * 0.25)
+
+            edible_gain = dX
+            stores['edible_mycelium'].add(edible_gain)
             stores['nutrients_N'].add(self.Y_NX * dX * 10)
-            stores['edible_mycelium'].add(dX * 0.75)
 
         if self.X >= 0.85 * self.X_max and not self.fruiting_active:
             self.fruiting_active = True
             self.fruiting_timer = 4
+
         elif self.fruiting_active:
             self.fruiting_timer -= dt
             if self.fruiting_timer <= 0:
                 yield_fresh = 0.30 * self.X
-                stores['edible_mycelium'].add(yield_fresh * 0.25)
-                stores['edible_mycelium'].add(yield_fresh * 0.75)
+                stores['edible_mycelium'].add(yield_fresh)
                 self.X = 0.2 * self.X_max
                 self.fruiting_active = False
+
+
+###########################
+#  first version of tick  #
+###########################
+#
+#    def tick(self, stores):
+#        dt = 1 / 24.0
+#        if stores['inedible_biomass'].level > 10:
+#            f_S = stores['inedible_biomass'].level / (20 + stores['inedible_biomass'].level)
+#            dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
+#            self.X += dX
+#            dS = (1 / self.Y_XS) * dX * 1000
+#            stores['inedible_biomass'].remove(dS)
+#            stores['edible_mycelium'].add(dX * 0.25)
+#            stores['nutrients_N'].add(self.Y_NX * dX * 10)
+#            stores['edible_mycelium'].add(dX * 0.75)
+#
+#        if self.X >= 0.85 * self.X_max and not self.fruiting_active:
+#            self.fruiting_active = True
+#            self.fruiting_timer = 4
+#        elif self.fruiting_active:
+#            self.fruiting_timer -= dt
+#            if self.fruiting_timer <= 0:
+#                yield_fresh = 0.30 * self.X
+#                stores['edible_mycelium'].add(yield_fresh * 0.25)
+#                stores['edible_mycelium'].add(yield_fresh * 0.75)
+#                self.X = 0.2 * self.X_max
+#                self.fruiting_active = False
