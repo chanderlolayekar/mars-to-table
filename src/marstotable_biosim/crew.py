@@ -7,6 +7,9 @@ class Crew:
         self.waste_per_person_per_hour = config.get('waste_per_person_per_hour', 0.02)
 
     def consume(self, stores):
+        if 'water_potable' not in stores:
+            raise KeyError("water_potable is missing from stores")
+
         stores['calories'].remove(self.calories_per_person_per_hour * self.size)
         stores['CO2'].add(self.co2_per_person_per_hour * self.size)
         stores['water_potable'].remove(self.water_per_person_per_hour * self.size)
