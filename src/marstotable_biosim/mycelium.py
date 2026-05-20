@@ -13,6 +13,7 @@ class MyceliumModule:
         dt = 1 / 24.0
 
         biomass = stores['inedible_biomass'].level
+                print("mycelium tick biomass=", stores['inedible_biomass'].level, "X=", self.X)
         if biomass > 10:
             f_S = biomass / (20 + biomass)
             dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
@@ -22,6 +23,7 @@ class MyceliumModule:
             stores['inedible_biomass'].remove(dS)
 
             edible_gain = dX
+                print("mycelium gain=", edible_gain, "removing=", dS)
             stores['edible_mycelium'].add(edible_gain)
             stores['nutrients_N'].add(self.Y_NX * dX * 10)
 
