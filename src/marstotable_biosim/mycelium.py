@@ -12,21 +12,32 @@ class MyceliumModule:
     def tick(self, stores):
         dt = 1 / 24.0
 
-        print("mycelium tick biomass=", stores['inedible_biomass'].level, "X=", self.X)
-
         biomass = stores['inedible_biomass'].level
+        print("mycelium tick biomass=", biomass, "X=", self.X)
+
         if biomass > 10:
-            f_S = biomass / (20 + biomass)
-            dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
-            self.X += dX
+            # If the system has reached or exceeded its physical capacity ceiling,
+            # we throttle metabolic growth to zero to conserve habitat resources.
+            if biomass >= 5000:
+                dX = 0.0
+                dS = 0.0
+                edible_gain = 0.0
+            else:
+                f_S = biomass / (20 + biomass)
+                dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
+                self.X += dX
+                dS = (1 / self.Y_XS) * dX * 100
+                edible_gain = dX * 100
 
-            dS = (1 / self.Y_XS) * dX * 100
-            stores['inedible_biomass'].remove(dS)
-
-            edible_gain = dX * 100
+            # Execute safe state updates based on throttled values
+            if dS > 0:
+                stores['inedible_biomass'].remove(dS)
+            
             print("mycelium gain=", edible_gain, "removing=", dS)
-            stores['edible_mycelium'].add(edible_gain)
-            stores['nutrients_N'].add(self.Y_NX * dX * 10)
+            
+            if edible_gain > 0:
+                stores['edible_mycelium'].add(edible_gain)
+                stores['nutrients_N'].add(self.Y_NX * dX * 10)
 
         if self.X >= 0.85 * self.X_max and not self.fruiting_active:
             self.fruiting_active = True
@@ -40,6 +51,56 @@ class MyceliumModule:
                 self.X = 0.2 * self.X_max
                 self.fruiting_active = False
 
+
+
+################################################
+#
+#  next modifications, testing in progress ...
+#
+################################################
+#
+#class MyceliumModule:
+#    def __init__(self, config):
+#        self.X = 1.0
+#        self.S = 500.0
+#        self.mu_max = 0.22
+#        self.X_max = 150.0
+#        self.Y_XS = 0.50
+#        self.Y_NX = 0.10
+#        self.fruiting_active = False
+#        self.fruiting_timer = 0
+#
+#    def tick(self, stores):
+#        dt = 1 / 24.0
+#
+#        print("mycelium tick biomass=", stores['inedible_biomass'].level, "X=", self.X)
+#
+#        biomass = stores['inedible_biomass'].level
+#        if biomass > 10:
+#            f_S = biomass / (20 + biomass)
+#            dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
+#            self.X += dX
+#
+#            dS = (1 / self.Y_XS) * dX * 100
+#            stores['inedible_biomass'].remove(dS)
+#
+#            edible_gain = dX * 100
+#            print("mycelium gain=", edible_gain, "removing=", dS)
+#            stores['edible_mycelium'].add(edible_gain)
+#            stores['nutrients_N'].add(self.Y_NX * dX * 10)
+#
+#        if self.X >= 0.85 * self.X_max and not self.fruiting_active:
+#            self.fruiting_active = True
+#            self.fruiting_timer = 4
+#
+#        elif self.fruiting_active:
+#            self.fruiting_timer -= dt
+#            if self.fruiting_timer <= 0:
+#                yield_fresh = 0.30 * self.X
+#                stores['edible_mycelium'].add(yield_fresh)
+#                self.X = 0.2 * self.X_max
+#                self.fruiting_active = False
+#
 ###########################
 #  first version of tick  #
 ###########################
