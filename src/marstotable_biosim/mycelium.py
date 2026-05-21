@@ -1,6 +1,6 @@
 class MyceliumModule:
     def __init__(self, config):
-        self.X = 0.0
+        self.X = 1.0
         self.S = 500.0
         self.mu_max = 0.22
         self.X_max = 150.0
