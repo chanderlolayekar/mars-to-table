@@ -39,6 +39,7 @@ class Simulation:
         self.insects.tick(self.stores)
         self.food_processor.tick(self.stores)
         self.water_rec.tick(self.stores)
+        print("calories=", self.stores["calories"].level, "edible_mycelium=", self.stores["edible_mycelium"].level)
         self.log.append(self.get_state())
         self.time += 1
 
