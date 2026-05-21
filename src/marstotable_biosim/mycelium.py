@@ -20,7 +20,7 @@ class MyceliumModule:
             dX = self.mu_max * self.X * (1 - self.X / self.X_max) * f_S * dt
             self.X += dX
 
-            dS = (1 / self.Y_XS) * dX * 1000
+            dS = (1 / self.Y_XS) * dX * 100
             stores['inedible_biomass'].remove(dS)
 
             edible_gain = dX
