@@ -23,7 +23,7 @@ class MyceliumModule:
             dS = (1 / self.Y_XS) * dX * 100
             stores['inedible_biomass'].remove(dS)
 
-            edible_gain = dX * 2
+            edible_gain = dX * 25
             print("mycelium gain=", edible_gain, "removing=", dS)
             stores['edible_mycelium'].add(edible_gain)
             stores['nutrients_N'].add(self.Y_NX * dX * 10)
