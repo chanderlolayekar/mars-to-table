@@ -99,7 +99,6 @@ class Simulation:
         plt.savefig(plot_path, dpi=300)
         plt.close()
         print(f"\n[SUCCESS] Presentation graph saved directly to: {plot_path}")
-
 ###################################
 # need to install pip install matplotlib
 # for below to work
