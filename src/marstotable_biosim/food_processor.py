@@ -1,8 +1,11 @@
 class FoodProcessor:
     def __init__(self, config):
         self.config = config
+        self.calories_per_mycelium = config.get("calories_per_mycelium", 500.0)
 
     def tick(self, stores):
-        if stores['edible_mycelium'].level > 5:
-            stores['calories'].add(2500)
-            stores['edible_mycelium'].remove(5)
+        edible = stores["edible_mycelium"].level
+        if edible >= 5:
+            amount = 5
+            stores["calories"].add(amount * self.calories_per_mycelium)
+            stores["edible_mycelium"].remove(amount)
