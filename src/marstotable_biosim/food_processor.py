@@ -1,7 +1,7 @@
 class FoodProcessor:
     def __init__(self, config):
         self.config = config
-        self.calories_per_unit = config.get("calories_per_unit", 500.0)
+        self.calories_per_unit = config.get("calories_per_unit", 1000.0)
         self.max_daily_conversion = config.get("max_daily_conversion", 1.0)
 
     def tick(self, stores):
