@@ -29,7 +29,7 @@ The complete engineering schemas, operational protocols, and data models have be
 
 ## 🏗️ Vertical System Integration Architecture
 
-Instead of a distributed horizontal layout, the Modular Habitat Food Food Module (MHFM) consolidates multiple trophic layers into a single vertical chassis, utilizing gravity-assisted nutrient cascades and localized micro-climates. See Presentation Slide Deck linked above for more details.
+Instead of a distributed horizontal layout, the Modular Habitat Food Food Module (MHFM) can be consolidated into multiple trophic layers into a single vertical chassis, utilizing gravity-assisted nutrient cascades and localized micro-climates. See Presentation Slide Deck linked above for more details.
 
 ---
 
