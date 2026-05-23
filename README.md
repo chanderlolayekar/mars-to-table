@@ -15,7 +15,7 @@ The project features a high-fidelity Python-based biosimulation model (`marstota
 ---
 
 ## 📺 Project Walkthrough Video
-Click the image below to watch the comprehensive 5-minute technical walkthrough and system demonstration on YouTube:
+Click the image below to watch the 10-minute technical walkthrough and system demonstration on YouTube:
 
 [![Mars to Table Video Pitch](https://img.youtube.com/vi/xkesTBYzVvc/maxresdefault.jpg)](https://www.youtube.com/watch?v=xkesTBYzVvc)
 ---
