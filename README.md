@@ -1,4 +1,4 @@
-# 🚀 Mars to Table: Bioregenerative Food System Simulation (MHFM)
+# 🚀 Mars to Table: Bioregenerative Food System Simulation
 
 Python simulation modules for Mars to Table and BioSim integration.
 
